@@ -6,13 +6,17 @@ orbs:
 jobs:
   build:
     docker:
-      - image: "cimg/node:14.15"  
+      - image: "cimg/node:23.9"  
     steps:
       - checkout
       - run:
           name: Clear NPM Cache
-          command: npm cache clean --force   
-      - node/install  
+          command: npm cache clean --force  
+      - run:
+          name: Verify Node.js & NPM Version
+          command: |
+            node -v
+            npm -v
       - run:
           name: Front-End Install
           command: |
