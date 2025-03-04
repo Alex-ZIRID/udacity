@@ -6,19 +6,13 @@ orbs:
 jobs:
   build:
     docker:
-      - image: "cimg/node:18.17"  
+      - image: "cimg/node:14.15"  
     steps:
       - checkout
       - run:
-          name: Check Node & NPM Versions Before Install
-          command: |
-            node -v
-            npm -v
-      - run:
-          name: Manually Install a Stable NPM Version
-          command: |
-            npm install -g npm@10  # Use a known stable version (e.g., NPM 10)
-            npm -v  # Verify after installation
+          name: Clear NPM Cache
+          command: npm cache clean --force   
+      - node/install  
       - run:
           name: Front-End Install
           command: |
